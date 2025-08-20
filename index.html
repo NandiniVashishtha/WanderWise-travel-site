@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WanderWise | Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">WanderWise</div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="bucketlist.html">Bucket List</a></li>
+        <li><a href="planner.html">Trip Planner</a></li>
+      </ul>
+      <button class="dark-toggle"><i class="fas fa-moon"></i></button>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Explore the World with <span>WanderWise</span></h1>
+      <p>Your smart travel companion for unforgettable journeys.</p>
+      <a href="planner.html" class="btn-primary">Start Planning</a>
+    </div>
+  </section>
+
+<!-- ====== Top Destinations Section ====== -->
+<section class="top-destinations">
+  <h2 class="section-title">Top Destinations</h2>
+  <div class="destinations-grid">
+    <div class="destination-card" onclick="openModal('paris')">
+      <img src="Paris.jpg" alt="Paris">
+      <h3>Paris, France</h3>
+    </div>
+    <div class="destination-card" onclick="openModal('bali')">
+      <img src="Bali.jpg" alt="Bali">
+      <h3>Bali, Indonesia</h3>
+    </div>
+    <div class="destination-card" onclick="openModal('kyoto')">
+      <img src="Kyoto.jpg" alt="Kyoto">
+      <h3>Kyoto, Japan</h3>
+    </div>
+    <div class="destination-card" onclick="openModal('newyork')">
+      <img src="NewYork.jpg" alt="New York">
+      <h3>New York, USA</h3>
+    </div>
+    <div class="destination-card" onclick="openModal('india')">
+  <img src="India.jpg" alt="India">
+  <h3>India</h3>
+</div>
+  </div>
+</section>
+
+<!-- ====== Destination Modal ====== -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modal-img" src="" alt="">
+    <h3 id="modal-title"></h3>
+    <p><strong>Best time to visit:</strong> <span id="modal-time"></span></p>
+    <p><strong>Estimated budget:</strong> <span id="modal-budget"></span></p>
+    <button class="btn-add">Add to Bucket List</button>
+  </div>
+</div>
+
+<section class="travel-blog">
+  <h2 class="section-title">Travel Blog</h2>
+
+  <!-- Filter Options -->
+  <div class="filters">
+    <button onclick="filterPosts('all')">All</button>
+    <button onclick="filterPosts('adventure')">Adventure</button>
+    <button onclick="filterPosts('food')">Food</button>
+    <button onclick="filterPosts('culture')">Culture</button>
+  </div>
+
+  <!-- Blog Cards Container -->
+  <div class="blog-cards">
+    <div class="blog-card" data-type="adventure">
+      <img src="hiking.jpg" alt="Hiking Adventure">
+      <h3>Hiking the Himalayas</h3>
+      <p class="short">A thrilling journey through snow-capped peaks...</p>
+      <p class="full hidden">Full blog content for Himalayas hiking experience...</p>
+      <button onclick="toggleBlog(this)">Read More</button>
+      <button onclick="likePost(this)" class="like-btn">Like (<span>0</span>)</button>
+    </div>
+
+    <div class="blog-card" data-type="food">
+      <img src="italian-food.jpg" alt="Italian Cuisine">
+      <h3>Tasting Italy</h3>
+      <p class="short">From creamy pastas to the best gelato in Rome...</p>
+      <p class="full hidden">Full blog content for Italian food lovers...</p>
+      <button onclick="toggleBlog(this)">Read More</button>
+      <button onclick="likePost(this)" class="like-btn">Like (<span>0</span>)</button>
+    </div>
+
+    <div class="blog-card" data-type="culture">
+      <img src="holi.jpg" alt="Holi Festival">
+      <h3>Colors of India</h3>
+      <p class="short">Experiencing the vibrant Holi festival in Mathura...</p>
+      <p class="full hidden">Full blog content about the cultural richness of Holi...</p>
+      <button onclick="toggleBlog(this)">Read More</button>
+      <button onclick="likePost(this)" class="like-btn">Like (<span>0</span>)</button>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Travel Bucket List Section ====== -->
+<section class="bucket-list">
+  <h2 class="section-title">My Travel Bucket List</h2>
+
+  <!-- Add New Destination -->
+  <div class="add-form">
+    <input type="text" id="place-name" placeholder="Enter destination name" />
+    <select id="place-status">
+      <option value="wishlist">Wishlist</option>
+      <option value="planning">Planning</option>
+      <option value="visited">Visited</option>
+    </select>
+    <button onclick="addPlace()"><i class="fas fa-plus"></i> Add</button>
+  </div>
+
+  <!-- Animated Counter -->
+  <div class="counter">
+    <i class="fas fa-globe-asia"></i>
+    <span id="visited-count">0</span> Countries Visited
+  </div>
+
+  <!-- Bucket List Container -->
+  <ul id="bucket-list"></ul>
+</section>
+
+<section class="trip-planner">
+  <h2 class="section-title">Trip Planner</h2>
+
+  <!-- Planner Form -->
+  <form id="planner-form">
+    <input type="text" id="trip-destination" placeholder="Destination" required />
+    <input type="date" id="trip-start" required />
+    <input type="date" id="trip-end" required />
+    <input type="number" id="trip-people" placeholder="Number of People" min="1" required />
+    <input type="number" id="trip-budget" placeholder="Total Budget in ₹" min="0" required />
+    <button type="submit">Calculate & Save Trip</button>
+  </form>
+
+  <!-- Trip Summary -->
+  <div class="trip-summary hidden">
+    <h3>Trip Summary</h3>
+    <p><strong>Destination:</strong> <span id="sum-destination"></span></p>
+    <p><strong>Travel Dates:</strong> <span id="sum-dates"></span></p>
+    <p><strong>People:</strong> <span id="sum-people"></span></p>
+    <p><strong>Budget per Person:</strong> ₹<span id="sum-per-person"></span></p>
+    <p><strong>Weather:</strong> <span id="sum-weather"></span></p>
+  </div>
+
+  <!-- Trip History -->
+  <div class="trip-history">
+    <h3>Saved Trips</h3>
+    <ul id="trip-history-list"></ul>
+  </div>
+</section>
+
+<nav class="mobile-nav">
+  <a href="#" class="nav-item"><i class="fas fa-compass"></i><span>Explore</span></a>
+  <a href="#trip-planner" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Planner</span></a>
+  <a href="#travel-blog" class="nav-item"><i class="fas fa-book-open"></i><span>Blog</span></a>
+  <a href="#" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+</nav>
+
+<!-- ✅ Newsletter Subscription -->
+<section class="newsletter">
+  <h2>Subscribe to Our Newsletter</h2>
+  <form onsubmit="event.preventDefault(); alert('Subscribed!')">
+    <input type="email" placeholder="Enter your email" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+<!--<button id="backToTop" title="Back to Top">⬆️</button>-->
+  <!-- FEATURES / SECTIONS PREVIEW -->
+  <section class="features">
+    <div class="feature-box">
+      <i class="fas fa-map-marked-alt"></i>
+      <h3>Top Destinations</h3>
+      <p>Discover handpicked places to explore.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fas fa-book-open"></i>
+      <h3>Travel Stories</h3>
+      <p>Read blogs and get inspired by fellow travelers.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fas fa-check-circle"></i>
+      <h3>Bucket List</h3>
+      <p>Create your personal travel goals and track them.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fas fa-calendar-alt"></i>
+      <h3>Trip Planner</h3>
+      <p>Plan your trips, calculate budget, and more!</p>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta">
+    <h2>Ready to create memories?</h2>
+    <a href="planner.html" class="btn-secondary">Plan a Trip</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 WanderWise. All Rights Reserved.</p>
+  </footer>
+  
+<section class="hero" data-aos="fade-up">...</section>
+<section class="features" data-aos="fade-left">...</section>
+
+  <script src="main.js"></script>
+  <button id="backToTop" title="Back to Top">⬆️</button>
+</body>
+</html>
