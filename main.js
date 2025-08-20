@@ -204,7 +204,7 @@ function renderTripHistory() {
 }
 
 async function getWeather(city) {
-  const apiKey = '92e431b65c8ff6c8dc897ba21003fa06'; // Replace with your OpenWeatherMap API key
+  const apiKey = 'your_API_key'; // Replace with your OpenWeatherMap API key
   try {
     const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
     const data = await res.json();
@@ -243,5 +243,6 @@ document.addEventListener('DOMContentLoaded', renderTripHistory);
 
 
 AOS.init();
+
 
 
